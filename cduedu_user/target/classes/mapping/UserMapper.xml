@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cduedu_user.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.cduedu_user.entity.User">
+        <result column="UsersPhone" jdbcType="CHAR" property="UsersPhone" />
+        <result column="UsersName" jdbcType="VARCHAR" property="UsersName" />
+        <result column="UsersEmail" jdbcType="VARCHAR" property="UsersEmail" />
+        <result column="UsersPassWord" jdbcType="VARCHAR" property="UsersPassWord" />
+        <result column="UsersPopedom" jdbcType="CHAR" property="UsersPopedom" />
+        <result column="UsersBan" jdbcType="CHAR" property="UsersBan" />
+    </resultMap>
+
+    <!--查询用户信息-->
+    <select id="getUserInfo" resultType="com.example.cduedu_user.entity.User">
+        select * from users where UsersPhone = #{UsersPhone}
+    </select>
+
+    <!--删除用户信息-->
+    <delete id="deleteById" parameterType="String">
+        delete from users where UsersPhone=#{UsersPhone}
+    </delete>
+
+    <!--返回所有用户信息-->
+    <select id="selectAll"  resultType="com.example.cduedu_user.entity.User">
+        select * from users
+    </select>
+
+    <!--增加用户信息-->
+    <insert id="save" parameterType="com.example.cduedu_user.entity.User" >
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="UsersPhone != null" >
+                UsersPhone,
+            </if>
+            <if test="UserName != null" >
+                UserName,
+            </if>
+            <if test="UsersEmail != null" >
+                UsersEmail,
+            </if>
+            <if test="UsersPassWord != null" >
+                UsersPassWord,
+            </if>
+            <if test="UsersPopedom != null" >
+                UsersPopedom,
+            </if>
+            <if test="UsersBan != null" >
+                UsersBan,
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="UsersPhone != null" >
+                #{UsersPhone,jdbcType=CHAR},
+            </if>
+            <if test="UserName != null" >
+                #{UserName,jdbcType=VARCHAR},
+            </if>
+            <if test="UsersEmail != null" >
+                #{UsersEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="UsersPassWord != null" >
+                #{UsersPassWord,jdbcType=VARCHAR},
+            </if>
+            <if test="UsersPopedom != null" >
+                #{UsersPopedom,jdbcType=CHAR},
+            </if>
+            <if test="UsersBan != null" >
+                #{UsersBan,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--根据UsersPhone更改用户信息-->
+    <update id="update" parameterType="com.example.cduedu_user.entity.User">
+        update users
+        <set>
+            <if test="UsersName != null" >
+                #{UsersName,jdbcType=VARCHAR},
+            </if>
+            <if test="UsersEmail != null" >
+                #{UsersEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="UsersPassWord != null" >
+                #{UsersPassWord,jdbcType=VARCHAR},
+            </if>
+            <if test="UsersPopedom != null" >
+                #{UsersPopedom,jdbcType=CHAR},
+            </if>
+            <if test="UsersBan != null" >
+                #{UsersBan,jdbcType=CHAR},
+            </if>
+        </set>
+        where UsersPhone = #{UsersPhone,jdbcType=CHAR}
+    </update>
+
+</mapper>

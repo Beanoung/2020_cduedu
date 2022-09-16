@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: a1234567
+    url: jdbc:mysql://39.106.78.166/cduedu?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.example.cduedu_user.entity
+
+#showSql
+logging:
+  level:
+    com.example.cduedu_user.mapper: debug
